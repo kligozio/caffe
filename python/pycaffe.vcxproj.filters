@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="caffe\_caffe.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="caffe\dllmain.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="caffe">
+      <UniqueIdentifier>{3544eca2-c8fc-440c-a56a-10326ad7fa45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\imagenet">
+      <UniqueIdentifier>{6e3837c7-5564-4353-bbac-c9653fd9345e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\test">
+      <UniqueIdentifier>{d5f00a2e-851e-4cf5-bf95-be2920bb0c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protobuf">
+      <UniqueIdentifier>{8f6f6c9c-4ce6-4ffb-86b3-772efe9be933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\proto">
+      <UniqueIdentifier>{6bd2d88b-a366-4623-b3bd-fe22148da6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dlls">
+      <UniqueIdentifier>{046692a5-4bcd-4dc0-9913-b3151c214026}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="caffe\__init__.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\classifier.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\detector.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\draw.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\io.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\pycaffe.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="classify.py" />
+    <CustomBuild Include="detect.py" />
+    <CustomBuild Include="draw_net.py" />
+    <CustomBuild Include="requirements.txt" />
+    <CustomBuild Include="caffe\imagenet\ilsvrc_2012_mean.npy">
+      <Filter>caffe\imagenet</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\test\test_net.py">
+      <Filter>caffe\test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\test\test_python_layer.py">
+      <Filter>caffe\test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\test\test_solver.py">
+      <Filter>caffe\test</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\src\caffe\proto\caffe.proto">
+      <Filter>protobuf</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\proto\caffe_pb2.py">
+      <Filter>caffe\proto</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\..\toolkits\boost_1_56_0\lib64-msvc-12.0\boost_python-vc120-mt-1_56.dll">
+      <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\3rdparty\lib\libglog.dll">
+      <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\3rdparty\lib\libopenblas.dll">
+      <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\..\toolkits\opencv_2_4_11\build\x64\vc12\bin\opencv_core2411.dll">
+      <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\..\Anaconda\python27.dll">
+      <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\net_spec.py">
+      <Filter>caffe</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

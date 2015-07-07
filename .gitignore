@@ -137,3 +137,6 @@ MANIFEST-*
 # NuGet directory
 /packages
 !/.nuget/NuGet.exe
+
+# python caffe project filters
+!/python/pycaffe.vcxproj.filters
