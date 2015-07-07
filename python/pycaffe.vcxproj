@@ -191,6 +191,12 @@ move *.py "$(ProjectDir)\caffe\proto"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="caffe\net_spec.py">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+    </CustomBuild>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
