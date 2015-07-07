@@ -3,3 +3,5 @@
 !bin/*.dll
 !include/glog/logging.h
 !include/glog/log_severity.h
+!include/google/protobuf/*.pb.cc
+!include/google/protobuf/*.pb.h
