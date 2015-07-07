@@ -30,11 +30,13 @@ void classname<Dtype>::funcname##_##gpu(const vector<Blob<Dtype>*>& top, \
     const vector<Blob<Dtype>*>& bottom) { NO_GPU; } \
 
 // part of some declarations. They could probably be ifdefed out safely where they are used...
+typedef struct cudnnContext *cudnnHandle_t;
+typedef struct CUstream_st *cudaStream_t;
 typedef struct cudnnTensorStruct*        cudnnTensorDescriptor_t;
 typedef struct cudnnConvolutionStruct*   cudnnConvolutionDescriptor_t;
 typedef struct cudnnPoolingStruct*       cudnnPoolingDescriptor_t;
 typedef struct cudnnFilterStruct*        cudnnFilterDescriptor_t;
-
+typedef enum cudnnPoolingMode_t;
 #else  // Normal GPU + CPU Caffe.
 
 #include <cublas_v2.h>
