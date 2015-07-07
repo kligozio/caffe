@@ -6,6 +6,48 @@
 *.o
 *.cuo
 
+# Compiled Sources
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.obj
+*.so
+*.deps
+
+# Don't ignore 3rd party bin
+!caffe/3rdparty/bin
+!caffe/3rdparty/include
+!caffe/3rdparty/lib
+
+# build / edit artifacts
+x64
+Win32
+x86
+Debug
+Release
+obj
+bin
+*.vcxproj.*
+*.csproj.*
+*.wixproj.*
+_ReSharper.*
+ipch
+*.suo
+*.opensdf
+*.sdf
+*.aps
+UpgradeLog.XML
+*.DotSettings.*
+StyleCop.Cache
+*~
+*.pch
+*.pdb
+*.svclog
+*.asv
+*.pubxml.user
+
 # Compiled Dynamic libraries
 *.so
 *.dylib

@@ -1,3 +1,8 @@
+# Modifications made to Visual Studio and a Windows Build
+I followed [Neil Shao's Blog](https://initialneil.wordpress.com/2015/01/11/build-caffe-in-windows-with-visual-studio-2013-cuda-6-5-opencv-2-4-9/) to get started 
+
+
+
 # Caffe
 
 Caffe is a deep learning framework made with expression, speed, and modularity in mind.
