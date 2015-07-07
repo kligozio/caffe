@@ -23,6 +23,12 @@
 #include "caffe/util/io.hpp"
 #include "caffe/util/rng.hpp"
 
+// port for Win32
+#ifdef _MSC_VER
+#include <direct.h>
+#define snprintf sprintf_s
+#endif
+
 using namespace caffe;  // NOLINT(build/namespaces)
 using std::pair;
 using boost::scoped_ptr;
