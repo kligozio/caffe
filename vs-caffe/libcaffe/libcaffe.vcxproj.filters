@@ -318,6 +318,12 @@
     <ClCompile Include="..\..\src\caffe\layers\window_data_layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\caffe\util\db_lmdb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\caffe\util\db_leveldb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\caffe\util\benchmark.hpp">
@@ -407,9 +413,6 @@
     <ClInclude Include="..\..\include\caffe\vision_layers.hpp">
       <Filter>Include Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\..\src\caffe\proto\caffe.proto" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Include Files">

@@ -103,6 +103,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\src\caffe\util\db.cpp" />
+    <ClCompile Include="..\..\src\caffe\util\db_leveldb.cpp" />
+    <ClCompile Include="..\..\src\caffe\util\db_lmdb.cpp" />
     <ClCompile Include="..\..\src\caffe\util\im2col.cpp" />
     <ClCompile Include="..\..\src\caffe\util\insert_splits.cpp" />
     <ClCompile Include="..\..\src\caffe\util\io.cpp" />
@@ -265,28 +267,6 @@
     </CudaCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\..\src\caffe\proto\caffe.proto">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cd $(SolutionDir)src\caffe\proto
-"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">cd $(SolutionDir)src\caffe\proto
-"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cd $(SolutionDir)src\caffe\proto
-"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">cd "$(SolutionDir)src\caffe\proto"
-"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).pb.h;$(ProjectDir)%(Filename).pb.cc</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.h;$(SolutionDir)src\caffe\proto\%(Filename).pb.cc</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">Performing "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">Performing "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">false</DeploymentContent>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\include\caffe\blob.hpp" />
     <ClInclude Include="..\..\include\caffe\caffe.hpp" />
     <ClInclude Include="..\..\include\caffe\common.hpp" />
@@ -409,7 +389,8 @@
       <AdditionalDependencies>opencv_core2411d.lib;opencv_calib3d2411d.lib;opencv_contrib2411d.lib;opencv_flann2411d.lib;opencv_highgui2411.lib;opencv_imgproc2411.lib;opencv_legacy2411.lib;opencv_ml2411.lib;opencv_gpu2411d.lib;opencv_objdetect2411d.lib;opencv_photo2411d.lib;opencv_features2d2411d.lib;opencv_nonfree2411d.lib;opencv_stitching2411d.lib;opencv_video2411d.lib;opencv_videostab2411d.lib;cudart.lib;cuda.lib;nppi.lib;cufft.lib;cublas.lib;curand.lib;gflagsd.lib;libglog.lib;libopenblas.dll.a;libprotobufd.lib;libprotoc.lib;leveldbd.lib;lmdbd.lib;libhdf5_D.lib;libhdf5_hl_D.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>../../scripts/GeneratePB.bat</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Generating ProtoBuf code</Message>
