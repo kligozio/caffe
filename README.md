@@ -1,7 +1,27 @@
 # Modifications made to Visual Studio and a Windows Build
 I followed [Neil Shao's Blog](https://initialneil.wordpress.com/2015/01/11/build-caffe-in-windows-with-visual-studio-2013-cuda-6-5-opencv-2-4-9/) to get started 
 
+## Preqequisites
+> 1.  Install Boost 1.0.56.  
+> 2.  Install CUDA 7.0
+> 3.  Install OpenCV (need version)
+> 4.  (Optional) Install Anaconda Python
 
+## Environment
+### Build Tools
+> 1.  BOOST_1_56_0=c:\toolkits\boost_1_56_0
+> 2.  OPENCV_X64_VS2013_2_4_11=c:\toolkits\opencv\build
+> 3.  PATH=%PATH%;%OPENCV_HOME%\build\x64\vc12\bin;%BOOST_1_56_0%\lib64-msvc-12.0;%OPENCV_X64_VS2013_2_4_11%\x64\vc12\bin
+> 4.  (Optional) ANACONDA_PATH=c:\Anaconda
+
+### Python
+> CAFFE_HOME=c:\home\projects\caffe\ 
+> PATH=%PATH%;%CAFFE_HOME%\bin\py;%CAFFE_HOME%\bin\py\caffe;%CAFFE_HOME%\3rdparty\lib
+
+If you'd like to run python from the command line, add
+> PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py
+
+In Visual Studio, right-click Search Paths and Add Folder to Search Path.  This needs to match PYTHON_PATH, so find your anaconda lib folder and your bin\py folder.
 
 # Caffe
 
