@@ -133,3 +133,6 @@ LOCK
 LOG*
 CURRENT
 MANIFEST-*
+
+# NuGet packages directory
+/packages
