@@ -1,3 +1,5 @@
 !bin
 !bin/*.exe
 !bin/*.dll
+!include/glog/logging.h
+!include/glog/log_severity.h
