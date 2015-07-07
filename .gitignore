@@ -134,5 +134,6 @@ LOG*
 CURRENT
 MANIFEST-*
 
-# NuGet packages directory
+# NuGet directory
 /packages
+!/.nuget/NuGet.exe
