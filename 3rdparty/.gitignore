@@ -6,3 +6,4 @@
 !include/google/protobuf/*.pb.cc
 !include/google/protobuf/*.pb.h
 !include/leveldb
+!include/lmdb
