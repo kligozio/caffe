@@ -21,9 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\tools\caffe.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D19616A-9037-458B-9E19-425526FE3F2B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -172,10 +169,4 @@
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.0.targets" />
     <Import Project="..\..\..\packages\protobuf.2.5.0.0\build\native\protobuf.targets" Condition="Exists('..\..\..\packages\protobuf.2.5.0.0\build\native\protobuf.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\protobuf.2.5.0.0\build\native\protobuf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\protobuf.2.5.0.0\build\native\protobuf.targets'))" />
-  </Target>
 </Project>
