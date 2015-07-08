@@ -7,6 +7,24 @@
     <ClCompile Include="caffe\dllmain.cpp">
       <Filter>caffe</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\concat_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\dropout_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\inner_product_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layer_factory.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\lrn_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -86,9 +104,6 @@
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\Anaconda\python27.dll">
       <Filter>dlls</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\net_spec.py">
-      <Filter>caffe</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release-CPU_ONLY|x64">
+      <Configuration>Release-CPU_ONLY</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -21,16 +25,32 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros">
     <NuGetPackageImportStamp>d85d09a0</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>_caffe</TargetName>
+    <OutDir>$(SolutionDir)bin\py\caffe\</OutDir>
+    <TargetExt>.pyd</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>_caffe</TargetName>
     <OutDir>$(SolutionDir)bin\py\caffe\</OutDir>
@@ -57,106 +77,173 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;PYCAFFE_EXPORTS;CPU_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)include;$(SolutionDir)include\caffe\util;$(OPENCV_X64_VS2013_2_4_11)\include;$(OPENCV_X64_VS2013_2_4_11)\include\opencv;$(BOOST_1_56_0);$(SolutionDir)3rdparty\include;$(SolutionDir)3rdparty\include\openblas;$(SolutionDir)3rdparty\include\hdf5;$(SolutionDir)3rdparty\include\lmdb;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Anaconda\libs;$(BOOST_1_56_0)\lib64-msvc-12.0;$(OPENCV_X64_VS2013_2_4_11)\x64\vc12\lib;$(SolutionDir)3rdparty\lib;$(SolutionDir)bin\$(Configuration);$(SolutionDir)bin\$(Configuration)-CPU_ONLY;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_calib3d2411.lib;opencv_contrib2411.lib;opencv_core2411.lib;opencv_features2d2411.lib;opencv_flann2411.lib;opencv_gpu2411.lib;opencv_highgui2411.lib;opencv_imgproc2411.lib;opencv_legacy2411.lib;opencv_ml2411.lib;opencv_nonfree2411.lib;opencv_objdetect2411.lib;opencv_ocl2411.lib;opencv_photo2411.lib;opencv_stitching2411.lib;opencv_superres2411.lib;opencv_ts2411.lib;opencv_video2411.lib;opencv_videostab2411.lib;cudart.lib;cuda.lib;nppi.lib;cufft.lib;cublas.lib;curand.lib;gflags.lib;libglog.lib;libopenblas.dll.a;libprotobuf.lib;libprotoc.lib;leveldb.lib;lmdb.lib;libhdf5.lib;libhdf5_hl.lib;Shlwapi.lib;libcaffe.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\caffe\layers\concat_layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\data_layer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\caffe\layers\dropout_layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\inner_product_layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\lrn_layer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\src\caffe\layer_factory.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="caffe\dllmain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="caffe\_caffe.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="caffe\classifier.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\detector.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\draw.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\io.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\pycaffe.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\__init__.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"
 mkdir "$(OutputPath)proto"
 echo. 2&gt; "$(OutputPath)proto\__init__.py"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)"
+mkdir "$(OutputPath)proto"
+echo. 2&gt; "$(OutputPath)proto\__init__.py"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)" and create proto\__init__.py</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)%(Filename)%(Extension)" and create proto\__init__.py</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="classify.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="detect.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="draw_net.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\imagenet\ilsvrc_2012_mean.npy">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)imagenet\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)imagenet\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)imagenet\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)imagenet\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)imagenet\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)imagenet\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_net.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_python_layer.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_solver.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)test\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)test\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\src\caffe\proto\caffe.proto">
       <FileType>Document</FileType>
@@ -164,52 +251,79 @@ echo. 2&gt; "$(OutputPath)proto\__init__.py"</Command>
 "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
 mkdir "$(ProjectDir)\caffe\proto"
 move *.py "$(ProjectDir)\caffe\proto"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">cd $(SolutionDir)src\caffe\proto
+"$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+mkdir "$(ProjectDir)\caffe\proto"
+move *.py "$(ProjectDir)\caffe\proto"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating python protobuf code into "$(ProjectDir)\caffe\proto"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">Generating python protobuf code into "$(ProjectDir)\caffe\proto"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)caffe\proto\caffe_pb2.py</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(ProjectDir)caffe\proto\caffe_pb2.py</Outputs>
     </CustomBuild>
     <CustomBuild Include="caffe\proto\caffe_pb2.py">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)proto\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)proto\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)proto\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)proto\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)proto\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)proto\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\Anaconda\python27.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\toolkits\boost_1_56_0\lib64-msvc-12.0\boost_python-vc120-mt-1_56.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "$(BOOST_1_56_0)\lib64-msvc-12.0\%(Filename)%(Extension)" "$(Outdir)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "$(BOOST_1_56_0)\lib64-msvc-12.0\%(Filename)%(Extension)" "$(Outdir)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "$(BOOST_1_56_0)\lib64-msvc-12.0\%(Filename)%(Extension)" "$(Outdir)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "$(BOOST_1_56_0)\lib64-msvc-12.0\%(Filename)%(Extension)" "$(Outdir)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\toolkits\opencv_2_4_11\build\x64\vc12\bin\opencv_core2411.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "$(OPENCV_HOME)\build\x64\vc12\bin\%(Filename)%(Extension)" "$(Outdir)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "$(OPENCV_HOME)\build\x64\vc12\bin\%(Filename)%(Extension)" "$(Outdir)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "$(OPENCV_HOME)\build\x64\vc12\bin\%(Filename)%(Extension)" "$(Outdir)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "$(OPENCV_HOME)\build\x64\vc12\bin\%(Filename)%(Extension)" "$(Outdir)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\3rdparty\lib\libglog.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <CustomBuild Include="..\3rdparty\lib\libopenblas.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(Fullpath)" "$(Outdir)%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(Outdir)%(Filename)%(Extension)</Outputs>
     </CustomBuild>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="requirements.txt">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">copy "%(FullPath)" "$(OutputPath)..\%(Filename)%(Extension)"</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(OutputPath)..\%(Filename)%(Extension)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
