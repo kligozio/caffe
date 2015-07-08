@@ -31,7 +31,9 @@ for /f %i in (requirements_windows_easyinstall.txt) do easy_install %i
 ```
 
 If you'd like to run python from the command line, add
-```PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py```
+```
+PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py
+```
 
 In Visual Studio, right-click Search Paths and Add Folder to Search Path.  This needs to match PYTHON_PATH, so find your anaconda lib folder and your bin\py folder.
 
