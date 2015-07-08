@@ -297,6 +297,23 @@
     <ClInclude Include="..\..\include\caffe\vision_layers.hpp" />
     <ClInclude Include="..\..\src\caffe\proto\caffe.pb.h" />
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\src\caffe\proto\caffe.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cd $(SolutionDir)src\caffe\proto
+"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">cd $(SolutionDir)src\caffe\proto
+"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">cd $(SolutionDir)src\caffe\proto
+"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+    </CustomBuild>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC2F4B18-F7CA-4435-90C1-76A64246E2A2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

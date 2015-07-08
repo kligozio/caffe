@@ -362,9 +362,6 @@
     <ClInclude Include="..\..\include\caffe\filler.hpp">
       <Filter>Include Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\caffe\util\im2col.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\caffe\util\insert_splits.hpp">
       <Filter>Include Files</Filter>
     </ClInclude>
@@ -413,6 +410,9 @@
     <ClInclude Include="..\..\include\caffe\vision_layers.hpp">
       <Filter>Include Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\caffe\util\im2col.hpp">
+      <Filter>Include Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Include Files">
@@ -424,5 +424,8 @@
     <Filter Include="Source Files\Cuda">
       <UniqueIdentifier>{fd0d9a0e-f099-4a67-9703-2a34d22eac24}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\caffe\proto\caffe.proto" />
   </ItemGroup>
 </Project>
