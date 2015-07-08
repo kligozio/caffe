@@ -23,6 +23,13 @@ I followed [Neil Shao's Blog](https://initialneil.wordpress.com/2015/01/11/build
 PATH=%PATH%;%CAFFE_HOME%\bin\py;%CAFFE_HOME%\bin\py\caffe;%CAFFE_HOME%\3rdparty\lib
 ```
 
+Install the required python libraries.  conda can't find all of these, so there's a combination of conda and easy_install
+```
+cd %CAFFE_HOME%\python
+conda install --file requirements_windows_conda.txt
+for /f %i in (requirements_windows_easyinstall.txt) do easy_install %i
+```
+
 If you'd like to run python from the command line, add
 ```PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py```
 
