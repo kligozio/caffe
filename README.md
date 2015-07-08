@@ -19,6 +19,8 @@ I followed [Neil Shao's Blog](https://initialneil.wordpress.com/2015/01/11/build
 ```
 
 ### Python
+You must build the pycaffe project if you're going to use python.  
+
 ```CAFFE_HOME=c:\home\projects\caffe\ 
 PATH=%PATH%;%CAFFE_HOME%\bin\py;%CAFFE_HOME%\bin\py\caffe;%CAFFE_HOME%\3rdparty\lib
 ```
@@ -36,6 +38,15 @@ PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py
 ```
 
 In Visual Studio, right-click Search Paths and Add Folder to Search Path.  This needs to match PYTHON_PATH, so find your anaconda lib folder and your bin\py folder.
+
+#### Troubleshooting
+I find the easiest way to troubleshoot the python environment is to increase verbosity and try to import caffe.  I.e.,
+```
+python -vvv
+>>> import caffe
+```
+
+If the DLL is found but won't load, check (double-check, then triple-check) your path.  You need to verify the initial setup (e.g., OPENCV) paths are correct, along with the Python specific ones.
 
 # Caffe
 
