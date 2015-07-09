@@ -19,10 +19,142 @@
     <ClCompile Include="..\src\caffe\layers\inner_product_layer.cpp">
       <Filter>caffe</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\caffe\layer_factory.cpp">
+    <ClCompile Include="..\src\caffe\layers\lrn_layer.cpp">
       <Filter>caffe</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\caffe\layers\lrn_layer.cpp">
+    <ClCompile Include="..\src\caffe\layers\image_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\absval_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\accuracy_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\argmax_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\bnll_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\contrastive_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\deconv_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\dummy_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\eltwise_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\euclidean_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\exp_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\filter_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\flatten_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\hdf5_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\hdf5_output_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\hinge_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\im2col_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\infogain_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\memory_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\multinomial_logistic_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\mvn_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\power_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\prelu_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\sigmoid_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\silence_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\slice_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\softmax_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\split_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\threshold_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\window_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\log_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\reduction_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\reshape_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\spp_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\base_conv_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\base_data_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\conv_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\neuron_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\pooling_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\relu_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\sigmoid_cross_entropy_loss_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\softmax_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layers\tanh_layer.cpp">
+      <Filter>caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layer_factory.cpp">
       <Filter>caffe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -33,62 +165,47 @@
     <Filter Include="caffe">
       <UniqueIdentifier>{3544eca2-c8fc-440c-a56a-10326ad7fa45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="caffe\imagenet">
-      <UniqueIdentifier>{6e3837c7-5564-4353-bbac-c9653fd9345e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="caffe\test">
-      <UniqueIdentifier>{d5f00a2e-851e-4cf5-bf95-be2920bb0c02}</UniqueIdentifier>
-    </Filter>
     <Filter Include="protobuf">
       <UniqueIdentifier>{8f6f6c9c-4ce6-4ffb-86b3-772efe9be933}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="caffe\proto">
-      <UniqueIdentifier>{6bd2d88b-a366-4623-b3bd-fe22148da6d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="dlls">
       <UniqueIdentifier>{046692a5-4bcd-4dc0-9913-b3151c214026}</UniqueIdentifier>
     </Filter>
+    <Filter Include="caffe\py">
+      <UniqueIdentifier>{f693282a-c2f9-4cb3-9d6c-13d1e4218a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\py\imagenet">
+      <UniqueIdentifier>{6e3837c7-5564-4353-bbac-c9653fd9345e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\py\proto">
+      <UniqueIdentifier>{6bd2d88b-a366-4623-b3bd-fe22148da6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="caffe\py\test">
+      <UniqueIdentifier>{d5f00a2e-851e-4cf5-bf95-be2920bb0c02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="caffe\__init__.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\classifier.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\detector.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\draw.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\io.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
-    <CustomBuild Include="caffe\pycaffe.py">
-      <Filter>caffe</Filter>
-    </CustomBuild>
     <CustomBuild Include="classify.py" />
     <CustomBuild Include="detect.py" />
     <CustomBuild Include="draw_net.py" />
     <CustomBuild Include="requirements.txt" />
     <CustomBuild Include="caffe\imagenet\ilsvrc_2012_mean.npy">
-      <Filter>caffe\imagenet</Filter>
+      <Filter>caffe\py\imagenet</Filter>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_net.py">
-      <Filter>caffe\test</Filter>
+      <Filter>caffe\py\test</Filter>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_python_layer.py">
-      <Filter>caffe\test</Filter>
+      <Filter>caffe\py\test</Filter>
     </CustomBuild>
     <CustomBuild Include="caffe\test\test_solver.py">
-      <Filter>caffe\test</Filter>
+      <Filter>caffe\py\test</Filter>
     </CustomBuild>
     <CustomBuild Include="..\src\caffe\proto\caffe.proto">
       <Filter>protobuf</Filter>
     </CustomBuild>
     <CustomBuild Include="caffe\proto\caffe_pb2.py">
-      <Filter>caffe\proto</Filter>
+      <Filter>caffe\py\proto</Filter>
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\toolkits\boost_1_56_0\lib64-msvc-12.0\boost_python-vc120-mt-1_56.dll">
       <Filter>dlls</Filter>
@@ -104,6 +221,24 @@
     </CustomBuild>
     <CustomBuild Include="..\..\..\..\..\..\Anaconda\python27.dll">
       <Filter>dlls</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\__init__.py">
+      <Filter>caffe\py</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\classifier.py">
+      <Filter>caffe\py</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\detector.py">
+      <Filter>caffe\py</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\draw.py">
+      <Filter>caffe\py</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\io.py">
+      <Filter>caffe\py</Filter>
+    </CustomBuild>
+    <CustomBuild Include="caffe\pycaffe.py">
+      <Filter>caffe\py</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>
