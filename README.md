@@ -1,19 +1,17 @@
 # Modifications made to Visual Studio and a Windows Build
-This uses the *Ceemple OpenCV distributeion for Visual Studio* to build Caffe's python bindings.
+This uses the *Ceemple OpenCV distribution for Visual Studio* to build Caffe's python bindings.
 
 ## Preqequisites
-```
+
 1.  Install the free [Ceemple OpenCV distribution for Visual Studio](https://www.ceemple.com/ceemple-opencv-visual-studio/)
 1.  Install [Anaconda Python](https://store.continuum.io/cshop/anaconda/)
 1.  Install [CUDA toolkit](https://developer.nvidia.com/cuda-downloads). You need this even if you don't plan to compile for a GPU because the project files reference the CUDA targets even when they don't actually get compiled (of course, you could also edit the project files to removed the references to CUDA targets).
-```
 
 ## Environment
 ### Build Tools
-```
+
 1.  `ANACONDA_HOME=C:\Anaconda` (or where you installed it)
 1.  `CAFFE_HOME=c:\my\caffe\project\directory` (where you cloned this project to)
-```
 
 ## Overcoming build issues
 
