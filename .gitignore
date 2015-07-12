@@ -140,3 +140,6 @@ MANIFEST-*
 
 # python caffe project filters
 !/python/pycaffe.vcxproj.filters
+
+# bad NuGet overlay location.
+/python/glog.overlay*

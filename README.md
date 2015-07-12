@@ -1,29 +1,52 @@
 # Modifications made to Visual Studio and a Windows Build
-I followed [Neil Shao's Blog](https://initialneil.wordpress.com/2015/01/11/build-caffe-in-windows-with-visual-studio-2013-cuda-6-5-opencv-2-4-9/) to get started 
+This uses the *Ceemple OpenCV distributeion for Visual Studio* to build Caffe's python bindings.
 
 ## Preqequisites
 ```
-1.  Install Boost 1.0.56.  
-2.  Install CUDA 7.0
-3.  Install OpenCV (need version)
-4.  (Optional) Install Anaconda Python
+1.  Install the free [Ceemple OpenCV distribution for Visual Studio](https://www.ceemple.com/ceemple-opencv-visual-studio/)
+1.  Install [Anaconda Python](https://store.continuum.io/cshop/anaconda/)
+1.  Install [CUDA toolkit](https://developer.nvidia.com/cuda-downloads). You need this even if you don't plan to compile for a GPU because the project files reference the CUDA targets even when they don't actually get compiled (of course, you could also edit the project files to removed the references to CUDA targets).
 ```
 
 ## Environment
 ### Build Tools
 ```
-1.  BOOST_1_56_0=c:\toolkits\boost_1_56_0
-2.  OPENCV_X64_VS2013_2_4_11=c:\toolkits\opencv\build
-3.  PATH=%PATH%;%OPENCV_HOME%\build\x64\vc12\bin;%BOOST_1_56_0%\lib64-msvc-12.0;%OPENCV_X64_VS2013_2_4_11%\x64\vc12\bin
-4.  (Optional) ANACONDA_PATH=c:\Anaconda
+1.  `ANACONDA_HOME=C:\Anaconda` (or where you installed it)
+1.  `CAFFE_HOME=c:\my\caffe\project\directory` (where you cloned this project to)
 ```
+
+## Overcoming build issues
+
+### glog NuGet package error
+
+The glog NuGet package has an overlay that applies in the wrong location. You 
+get a missing library error because of this. Just copy the misplaced *contents*
+of the `$(ProjectDir)glog.overlay.../` directory to the
+`$(SolutionDir)packages/glog.../` directory and recompile.
+
+### Python python27_d.lib link failure
+
+If you build for debugging, for some reason, the python include files expect
+you to want to debug the python executable itself. But, Anaconda doesn't come
+with debug libraries. To keep from expecting python debugging when building your
+own debugging setup, edit the `C:\Anaconda\include\pyconfig.h` file and comment
+out all the code that runs when `_DEBUG` is defined. One place sets up the 
+*python27_d.lib* link request and another sets the `#define Py_DEBUG`. Making
+this change will keep any code on your development machine from being able to
+debug the python executable.
+
+If you actually want to debug python along with your code, the web seems to
+think you must build your own *python27_d.lib* from source. If you do this,
+don't change the `pyconfig.h` file.
+
+## Using
+
+Currently, only the Python project is operational.
 
 ### Python
-You must build the pycaffe project if you're going to use python.  
+You must build the pycaffe project.
 
-```CAFFE_HOME=c:\home\projects\caffe\ 
-PATH=%PATH%;%CAFFE_HOME%\bin\py;%CAFFE_HOME%\bin\py\caffe;%CAFFE_HOME%\3rdparty\lib
-```
+`PATH=%PATH%;%CAFFE_HOME%\bin\py;%CAFFE_HOME%\bin\py\caffe`
 
 Install the required python libraries.  conda can't find all of these, so there's a combination of conda and easy_install
 ```
@@ -34,8 +57,10 @@ for /f %i in (requirements_windows_easyinstall.txt) do easy_install %i
 
 If you'd like to run python from the command line, add
 ```
-PYTHONPATH=%ANACONDA_PATH%\Lib;%CAFFE_HOME%\bin\py
+PYTHONPATH=%ANACONDA_HOME%\Lib;%CAFFE_HOME%\bin\py
 ```
+
+#### For Visual Studio python projects that use pycaffe
 
 In Visual Studio, right-click Search Paths and Add Folder to Search Path.  This needs to match PYTHON_PATH, so find your anaconda lib folder and your bin\py folder.
 
