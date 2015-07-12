@@ -113,14 +113,13 @@
     <ClCompile Include="..\src\caffe\util\io.cpp" />
     <ClCompile Include="..\src\caffe\util\math_functions.cpp" />
     <ClCompile Include="..\src\caffe\util\upgrade_proto.cpp" />
-    <ClCompile Include="caffe\dllmain.cpp" />
     <ClCompile Include="caffe\_caffe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\caffe\proto\caffe.pb.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\src\caffe\proto\caffe.proto">
+    <None Include="..\src\caffe\proto\caffe.proto">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
                 cd $(SolutionDir)src\caffe\proto
@@ -170,7 +169,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h;$(ProjectDir)\caffe\proto\%(Filename)_pb2.py;$(ProjectDir)\caffe\proto\__init__.py</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h;$(ProjectDir)\caffe\proto\%(Filename)_pb2.py;$(ProjectDir)\caffe\proto\__init__.py</Outputs>
-    </CustomBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="caffe\classifier.py">
@@ -710,6 +709,30 @@
       <Message>Copying gflagsd.dll to libgflag-debug.dll - for some reason we need both</Message>
       <Outputs>$(OutDir)libgflags-debug.dll</Outputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+  "$(ProjectDir)\caffe\proto\caffe_pb2.py"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  echo mkdir "$(ProjectDir)\caffe\proto"
+  mkdir "$(ProjectDir)\caffe\proto"
+  echo move *.py "$(ProjectDir)\caffe\proto"
+  move *.py "$(ProjectDir)\caffe\proto"
+)
+if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
+  echo Create $(ProjectDir)\caffe\proto\__init__.py
+  echo. &gt; "$(ProjectDir)\caffe\proto\__init__.py"
+)</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
     <ClCompile>
@@ -733,6 +756,30 @@
       <Outputs>$(OutDir)libgflags-debug.dll</Outputs>
       <Message>Copying gflagsd.dll to libgflag-debug.dll - for some reason we need both</Message>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+  "$(ProjectDir)\caffe\proto\caffe_pb2.py"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  echo mkdir "$(ProjectDir)\caffe\proto"
+  mkdir "$(ProjectDir)\caffe\proto"
+  echo move *.py "$(ProjectDir)\caffe\proto"
+  move *.py "$(ProjectDir)\caffe\proto"
+)
+if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
+  echo Create $(ProjectDir)\caffe\proto\__init__.py
+  echo. &gt; "$(ProjectDir)\caffe\proto\__init__.py"
+)</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -760,6 +807,30 @@
       <Outputs>$(OutDir)libgflags.dll</Outputs>
       <Message>Copying gflags.dll to libgflag.dll - for some reason we need both</Message>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+  "$(ProjectDir)\caffe\proto\caffe_pb2.py"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  echo mkdir "$(ProjectDir)\caffe\proto"
+  mkdir "$(ProjectDir)\caffe\proto"
+  echo move *.py "$(ProjectDir)\caffe\proto"
+  move *.py "$(ProjectDir)\caffe\proto"
+)
+if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
+  echo Create $(ProjectDir)\caffe\proto\__init__.py
+  echo. &gt; "$(ProjectDir)\caffe\proto\__init__.py"
+)</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
     <ClCompile>
@@ -785,6 +856,30 @@
       <Message>Copying gflags.dll to libgflag.dll - for some reason we need both</Message>
       <Outputs>$(OutDir)libgflags.dll</Outputs>
     </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+  "$(ProjectDir)\caffe\proto\caffe_pb2.py"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  echo mkdir "$(ProjectDir)\caffe\proto"
+  mkdir "$(ProjectDir)\caffe\proto"
+  echo move *.py "$(ProjectDir)\caffe\proto"
+  move *.py "$(ProjectDir)\caffe\proto"
+)
+if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
+  echo Create $(ProjectDir)\caffe\proto\__init__.py
+  echo. &gt; "$(ProjectDir)\caffe\proto\__init__.py"
+)</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

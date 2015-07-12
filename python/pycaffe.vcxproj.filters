@@ -264,9 +264,6 @@
     <ClCompile Include="caffe\_caffe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="caffe\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdparty\mkstemp\mkstemp.cpp">
       <Filter>Source Files\caffe\3rdparty</Filter>
     </ClCompile>
