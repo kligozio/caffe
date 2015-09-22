@@ -372,6 +372,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\snappy-single-file.cpp">
       <Filter>Source Files\packages</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\caffe\util\blocking_queue.cpp">
+      <Filter>Source Files\caffe\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\layer.cpp">
+      <Filter>Source Files\caffe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\util\hdf5.cpp">
+      <Filter>Source Files\caffe\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\caffe\data_reader.cpp">
+      <Filter>Source Files\caffe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\caffe\proto\caffe.pb.h">
@@ -381,9 +393,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="custom.props" />
+    <None Include="..\src\caffe\proto\caffe.proto" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\src\caffe\proto\caffe.proto" />
     <CustomBuild Include="caffe\test\test_solver.py">
       <Filter>Source Files\py\caffe\test</Filter>
     </CustomBuild>

@@ -13,15 +13,18 @@ namespace {
 
   void handle_signal(int signal) {
     switch (signal) {
+#ifndef _MSC_VER
     case SIGHUP:
       got_sighup = true;
       break;
+#endif
     case SIGINT:
       got_sigint = true;
       break;
     }
   }
 
+#ifndef _MSC_VER
   void HookupHandler() {
     if (already_hooked_up) {
       LOG(FATAL) << "Tried to hookup signal handlers more than once.";
@@ -65,6 +68,25 @@ namespace {
       already_hooked_up = false;
     }
   }
+#else
+  void HookupHandler() {
+      if (already_hooked_up) {
+          LOG(FATAL) << "Tried to hookup signal handlers more than once.";
+      }
+      already_hooked_up = true;
+
+      signal(SIGINT, &handle_signal);
+  }
+
+  // Set the signal handlers to the default.
+  void UnhookHandler() {
+      if (already_hooked_up) {
+
+          signal(SIGINT, nullptr);
+          already_hooked_up = false;
+      }
+  }
+#endif
 
   // Return true iff a SIGINT has been received since the last time this
   // function was called.

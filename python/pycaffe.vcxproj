@@ -41,8 +41,10 @@
     </ClCompile>
     <ClCompile Include="..\src\caffe\blob.cpp" />
     <ClCompile Include="..\src\caffe\common.cpp" />
+    <ClCompile Include="..\src\caffe\data_reader.cpp" />
     <ClCompile Include="..\src\caffe\data_transformer.cpp" />
     <ClCompile Include="..\src\caffe\internal_thread.cpp" />
+    <ClCompile Include="..\src\caffe\layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\absval_layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\accuracy_layer.cpp" />
     <ClCompile Include="..\src\caffe\layers\argmax_layer.cpp" />
@@ -104,10 +106,12 @@
     <ClCompile Include="..\src\caffe\solver.cpp" />
     <ClCompile Include="..\src\caffe\syncedmem.cpp" />
     <ClCompile Include="..\src\caffe\util\benchmark.cpp" />
+    <ClCompile Include="..\src\caffe\util\blocking_queue.cpp" />
     <ClCompile Include="..\src\caffe\util\cudnn.cpp" />
     <ClCompile Include="..\src\caffe\util\db.cpp" />
     <ClCompile Include="..\src\caffe\util\db_leveldb.cpp" />
     <ClCompile Include="..\src\caffe\util\db_lmdb.cpp" />
+    <ClCompile Include="..\src\caffe\util\hdf5.cpp" />
     <ClCompile Include="..\src\caffe\util\im2col.cpp" />
     <ClCompile Include="..\src\caffe\util\insert_splits.cpp" />
     <ClCompile Include="..\src\caffe\util\io.cpp" />
@@ -612,7 +616,6 @@
     <ProjectGuid>{FD539F90-8A82-45B6-852F-AEFE536C88FE}</ProjectGuid>
     <RootNamespace>caffe</RootNamespace>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -663,7 +666,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <NuGetPackageImportStamp>4cdcd120</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>584586f1</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
     <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
@@ -695,7 +698,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -740,7 +743,7 @@ if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -789,7 +792,7 @@ if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -840,7 +843,7 @@ if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -883,42 +886,19 @@ if not exist "$(ProjectDir)\caffe\proto\__init__.py" (
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-    <Import Project="..\packages\boost.1.58.0.0\build\native\boost.targets" Condition="Exists('..\packages\boost.1.58.0.0\build\native\boost.targets')" />
-    <Import Project="..\packages\boost_date_time-vc120.1.58.0.0\build\native\boost_date_time-vc120.targets" Condition="Exists('..\packages\boost_date_time-vc120.1.58.0.0\build\native\boost_date_time-vc120.targets')" />
     <Import Project="..\packages\gflags.2.1.2.1\build\native\gflags.targets" Condition="Exists('..\packages\gflags.2.1.2.1\build\native\gflags.targets')" />
     <Import Project="..\packages\glog.0.3.3.0\build\native\glog.targets" Condition="Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" />
     <Import Project="..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets" Condition="Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" />
     <Import Project="..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets" Condition="Exists('..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets')" />
     <Import Project="..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets" Condition="Exists('..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets')" />
-    <Import Project="..\packages\boost_thread-vc120.1.58.0.0\build\native\boost_thread-vc120.targets" Condition="Exists('..\packages\boost_thread-vc120.1.58.0.0\build\native\boost_thread-vc120.targets')" />
-    <Import Project="..\packages\boost_system-vc120.1.58.0.0\build\native\boost_system-vc120.targets" Condition="Exists('..\packages\boost_system-vc120.1.58.0.0\build\native\boost_system-vc120.targets')" />
-    <Import Project="..\packages\boost_chrono-vc120.1.58.0.0\build\native\boost_chrono-vc120.targets" Condition="Exists('..\packages\boost_chrono-vc120.1.58.0.0\build\native\boost_chrono-vc120.targets')" />
-    <Import Project="..\packages\boost_python.1.58.0.0\build\native\boost_python.targets" Condition="Exists('..\packages\boost_python.1.58.0.0\build\native\boost_python.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\boost.1.58.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.58.0.0\build\native\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc120.1.58.0.0\build\native\boost_date_time-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc120.1.58.0.0\build\native\boost_date_time-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\gflags.2.1.2.1\build\native\gflags.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.1.2.1\build\native\gflags.props'))" />
-    <Error Condition="!Exists('..\packages\gflags.2.1.2.1\build\native\gflags.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.1.2.1\build\native\gflags.targets'))" />
-    <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.props'))" />
-    <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.targets'))" />
-    <Error Condition="!Exists('..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets'))" />
-    <Error Condition="!Exists('..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets'))" />
-    <Error Condition="!Exists('..\packages\Crc32C.1.0.4\build\native\Crc32C.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crc32C.1.0.4\build\native\Crc32C.props'))" />
-    <Error Condition="!Exists('..\packages\Snappy.1.1.1.7\build\native\Snappy.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Snappy.1.1.1.7\build\native\Snappy.props'))" />
-    <Error Condition="!Exists('..\packages\LevelDB.1.16.0.5\build\native\LevelDB.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LevelDB.1.16.0.5\build\native\LevelDB.props'))" />
-    <Error Condition="!Exists('..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_thread-vc120.1.58.0.0\build\native\boost_thread-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc120.1.58.0.0\build\native\boost_thread-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_system-vc120.1.58.0.0\build\native\boost_system-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc120.1.58.0.0\build\native\boost_system-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_chrono-vc120.1.58.0.0\build\native\boost_chrono-vc120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc120.1.58.0.0\build\native\boost_chrono-vc120.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_python.1.58.0.0\build\native\boost_python.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_python.1.58.0.0\build\native\boost_python.targets'))" />
-  </Target>
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.0.targets" />
+    <Import Project="..\packages\boost_chrono-vc120.1.59.0.0\build\native\boost_chrono-vc120.targets" Condition="Exists('..\packages\boost_chrono-vc120.1.59.0.0\build\native\boost_chrono-vc120.targets')" />
+    <Import Project="..\packages\boost_date_time-vc120.1.59.0.0\build\native\boost_date_time-vc120.targets" Condition="Exists('..\packages\boost_date_time-vc120.1.59.0.0\build\native\boost_date_time-vc120.targets')" />
+    <Import Project="..\packages\boost_python.1.59.0.0\build\native\boost_python.targets" Condition="Exists('..\packages\boost_python.1.59.0.0\build\native\boost_python.targets')" />
+    <Import Project="..\packages\boost_system-vc120.1.59.0.0\build\native\boost_system-vc120.targets" Condition="Exists('..\packages\boost_system-vc120.1.59.0.0\build\native\boost_system-vc120.targets')" />
+    <Import Project="..\packages\boost_thread-vc120.1.59.0.0\build\native\boost_thread-vc120.targets" Condition="Exists('..\packages\boost_thread-vc120.1.59.0.0\build\native\boost_thread-vc120.targets')" />
+    <Import Project="..\packages\boost.1.59.0.0\build\native\boost.targets" Condition="Exists('..\packages\boost.1.59.0.0\build\native\boost.targets')" />
   </ImportGroup>
 </Project>

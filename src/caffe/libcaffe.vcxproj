@@ -41,8 +41,10 @@
     </ClCompile>
     <ClCompile Include="blob.cpp" />
     <ClCompile Include="common.cpp" />
+    <ClCompile Include="data_reader.cpp" />
     <ClCompile Include="data_transformer.cpp" />
     <ClCompile Include="internal_thread.cpp" />
+    <ClCompile Include="layer.cpp" />
     <ClCompile Include="layers\absval_layer.cpp" />
     <ClCompile Include="layers\accuracy_layer.cpp" />
     <ClCompile Include="layers\argmax_layer.cpp" />
@@ -100,18 +102,22 @@
     <ClCompile Include="layers\window_data_layer.cpp" />
     <ClCompile Include="layer_factory.cpp" />
     <ClCompile Include="net.cpp" />
+    <ClCompile Include="parallel.cpp" />
     <ClCompile Include="proto\caffe.pb.cc" />
     <ClCompile Include="solver.cpp" />
     <ClCompile Include="syncedmem.cpp" />
     <ClCompile Include="util\benchmark.cpp" />
+    <ClCompile Include="util\blocking_queue.cpp" />
     <ClCompile Include="util\cudnn.cpp" />
     <ClCompile Include="util\db.cpp" />
     <ClCompile Include="util\db_leveldb.cpp" />
     <ClCompile Include="util\db_lmdb.cpp" />
+    <ClCompile Include="util\hdf5.cpp" />
     <ClCompile Include="util\im2col.cpp" />
     <ClCompile Include="util\insert_splits.cpp" />
     <ClCompile Include="util\io.cpp" />
     <ClCompile Include="util\math_functions.cpp" />
+    <ClCompile Include="util\signal_handler.cpp" />
     <ClCompile Include="util\upgrade_proto.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -331,26 +337,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -381,28 +387,32 @@
     <NuGetPackageImportStamp>f0fc31ca</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
-    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
     <TargetName>caffe</TargetName>
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
     <TargetName>caffe</TargetName>
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
     <TargetName>caffe</TargetName>
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
-    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
     <TargetName>caffe</TargetName>
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+    <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -410,7 +420,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -447,7 +457,7 @@ if defined notfound (
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -488,7 +498,7 @@ if defined notfound (
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>
@@ -531,7 +541,7 @@ if defined notfound (
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </ClCompile>
     <Link>

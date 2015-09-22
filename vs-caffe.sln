@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D07A6A06-22E1-4F9D-A9D7-F8CBB92FE805}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pycaffe", "python\pycaffe.vcxproj", "{FD539F90-8A82-45B6-852F-AEFE536C88FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcaffe", "src\caffe\libcaffe.vcxproj", "{733289A2-4F35-4A95-96D6-AAF73EE8B691}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "caffe", "tools\caffe.vcxproj", "{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}"
+	ProjectSection(ProjectDependencies) = postProject
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691} = {733289A2-4F35-4A95-96D6-AAF73EE8B691}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +28,22 @@ Global
 		{FD539F90-8A82-45B6-852F-AEFE536C88FE}.Release|x64.Build.0 = Release|x64
 		{FD539F90-8A82-45B6-852F-AEFE536C88FE}.Release-CPU_ONLY|x64.ActiveCfg = Release-CPU_ONLY|x64
 		{FD539F90-8A82-45B6-852F-AEFE536C88FE}.Release-CPU_ONLY|x64.Build.0 = Release-CPU_ONLY|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Debug|x64.ActiveCfg = Debug|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Debug|x64.Build.0 = Debug|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Debug-CPU_ONLY|x64.ActiveCfg = Debug-CPU_ONLY|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Debug-CPU_ONLY|x64.Build.0 = Debug-CPU_ONLY|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Release|x64.ActiveCfg = Release|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Release|x64.Build.0 = Release|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Release-CPU_ONLY|x64.ActiveCfg = Release-CPU_ONLY|x64
+		{733289A2-4F35-4A95-96D6-AAF73EE8B691}.Release-CPU_ONLY|x64.Build.0 = Release-CPU_ONLY|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Debug|x64.ActiveCfg = Debug|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Debug|x64.Build.0 = Debug|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Debug-CPU_ONLY|x64.ActiveCfg = Debug-CPU_ONLY|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Debug-CPU_ONLY|x64.Build.0 = Debug-CPU_ONLY|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Release|x64.ActiveCfg = Release|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Release|x64.Build.0 = Release|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Release-CPU_ONLY|x64.ActiveCfg = Release-CPU_ONLY|x64
+		{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}.Release-CPU_ONLY|x64.Build.0 = Release-CPU_ONLY|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
