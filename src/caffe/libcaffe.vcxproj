@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Snappy.1.1.1.7\build\native\Snappy.props" Condition="Exists('..\..\packages\Snappy.1.1.1.7\build\native\Snappy.props')" />
+  <Import Project="..\..\packages\LevelDB.1.16.0.5\build\native\LevelDB.props" Condition="Exists('..\..\packages\LevelDB.1.16.0.5\build\native\LevelDB.props')" />
+  <Import Project="..\..\packages\glog.0.3.3.0\build\native\glog.props" Condition="Exists('..\..\packages\glog.0.3.3.0\build\native\glog.props')" />
+  <Import Project="..\..\packages\gflags.2.1.2.1\build\native\gflags.props" Condition="Exists('..\..\packages\gflags.2.1.2.1\build\native\gflags.props')" />
+  <Import Project="..\..\packages\Crc32C.1.0.4\build\native\Crc32C.props" Condition="Exists('..\..\packages\Crc32C.1.0.4\build\native\Crc32C.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-CPU_ONLY|x64">
+      <Configuration>Debug-CPU_ONLY</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-CPU_ONLY|x64">
+      <Configuration>Release-CPU_ONLY</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\3rdparty\getopt\getopt.c" />
+    <ClCompile Include="..\..\3rdparty\h5lt\H5LT.c" />
+    <ClCompile Include="..\..\3rdparty\h5lt\H5LTanalyze.c">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">BOOST_PYTHON_STATIC_LIB;BOOST_PYTHON_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\h5lt\H5LTparse.c" />
+    <ClCompile Include="..\..\3rdparty\mkstemp\mkstemp.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HAS_LMDB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">HAS_LMDB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HAS_LMDB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">HAS_LMDB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="blob.cpp" />
+    <ClCompile Include="common.cpp" />
+    <ClCompile Include="data_transformer.cpp" />
+    <ClCompile Include="internal_thread.cpp" />
+    <ClCompile Include="layers\absval_layer.cpp" />
+    <ClCompile Include="layers\accuracy_layer.cpp" />
+    <ClCompile Include="layers\argmax_layer.cpp" />
+    <ClCompile Include="layers\base_conv_layer.cpp" />
+    <ClCompile Include="layers\base_data_layer.cpp" />
+    <ClCompile Include="layers\bnll_layer.cpp" />
+    <ClCompile Include="layers\concat_layer.cpp" />
+    <ClCompile Include="layers\contrastive_loss_layer.cpp" />
+    <ClCompile Include="layers\conv_layer.cpp" />
+    <ClCompile Include="layers\cudnn_conv_layer.cpp" />
+    <ClCompile Include="layers\cudnn_pooling_layer.cpp" />
+    <ClCompile Include="layers\cudnn_relu_layer.cpp" />
+    <ClCompile Include="layers\cudnn_sigmoid_layer.cpp" />
+    <ClCompile Include="layers\cudnn_softmax_layer.cpp" />
+    <ClCompile Include="layers\cudnn_tanh_layer.cpp" />
+    <ClCompile Include="layers\data_layer.cpp" />
+    <ClCompile Include="layers\deconv_layer.cpp" />
+    <ClCompile Include="layers\dropout_layer.cpp" />
+    <ClCompile Include="layers\dummy_data_layer.cpp" />
+    <ClCompile Include="layers\eltwise_layer.cpp" />
+    <ClCompile Include="layers\euclidean_loss_layer.cpp" />
+    <ClCompile Include="layers\exp_layer.cpp" />
+    <ClCompile Include="layers\filter_layer.cpp" />
+    <ClCompile Include="layers\flatten_layer.cpp" />
+    <ClCompile Include="layers\hdf5_data_layer.cpp" />
+    <ClCompile Include="layers\hdf5_output_layer.cpp" />
+    <ClCompile Include="layers\hinge_loss_layer.cpp" />
+    <ClCompile Include="layers\im2col_layer.cpp" />
+    <ClCompile Include="layers\image_data_layer.cpp" />
+    <ClCompile Include="layers\infogain_loss_layer.cpp" />
+    <ClCompile Include="layers\inner_product_layer.cpp" />
+    <ClCompile Include="layers\log_layer.cpp" />
+    <ClCompile Include="layers\loss_layer.cpp" />
+    <ClCompile Include="layers\lrn_layer.cpp" />
+    <ClCompile Include="layers\memory_data_layer.cpp" />
+    <ClCompile Include="layers\multinomial_logistic_loss_layer.cpp" />
+    <ClCompile Include="layers\mvn_layer.cpp" />
+    <ClCompile Include="layers\neuron_layer.cpp" />
+    <ClCompile Include="layers\pooling_layer.cpp" />
+    <ClCompile Include="layers\power_layer.cpp" />
+    <ClCompile Include="layers\prelu_layer.cpp" />
+    <ClCompile Include="layers\reduction_layer.cpp" />
+    <ClCompile Include="layers\relu_layer.cpp" />
+    <ClCompile Include="layers\reshape_layer.cpp" />
+    <ClCompile Include="layers\sigmoid_cross_entropy_loss_layer.cpp" />
+    <ClCompile Include="layers\sigmoid_layer.cpp" />
+    <ClCompile Include="layers\silence_layer.cpp" />
+    <ClCompile Include="layers\slice_layer.cpp" />
+    <ClCompile Include="layers\softmax_layer.cpp" />
+    <ClCompile Include="layers\softmax_loss_layer.cpp" />
+    <ClCompile Include="layers\split_layer.cpp" />
+    <ClCompile Include="layers\spp_layer.cpp" />
+    <ClCompile Include="layers\tanh_layer.cpp" />
+    <ClCompile Include="layers\threshold_layer.cpp" />
+    <ClCompile Include="layers\window_data_layer.cpp" />
+    <ClCompile Include="layer_factory.cpp" />
+    <ClCompile Include="net.cpp" />
+    <ClCompile Include="proto\caffe.pb.cc" />
+    <ClCompile Include="solver.cpp" />
+    <ClCompile Include="syncedmem.cpp" />
+    <ClCompile Include="util\benchmark.cpp" />
+    <ClCompile Include="util\cudnn.cpp" />
+    <ClCompile Include="util\db.cpp" />
+    <ClCompile Include="util\db_leveldb.cpp" />
+    <ClCompile Include="util\db_lmdb.cpp" />
+    <ClCompile Include="util\im2col.cpp" />
+    <ClCompile Include="util\insert_splits.cpp" />
+    <ClCompile Include="util\io.cpp" />
+    <ClCompile Include="util\math_functions.cpp" />
+    <ClCompile Include="util\upgrade_proto.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="proto\caffe.pb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="proto\caffe.proto">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+                cd $(SolutionDir)src\caffe\proto
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+            </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
+                cd $(SolutionDir)src\caffe\proto
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+            </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+                cd $(SolutionDir)src\caffe\proto
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+            </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
+                cd $(SolutionDir)src\caffe\proto
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"
+                echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+                "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ "%(FileName)%(Extension)"
+            </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate protobuf source</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">Generate protobuf source</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ "%(FileName)%(Extension)"</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">Generate protobuf source</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">$(SolutionDir)src\caffe\proto\%(Filename).pb.cc;$(SolutionDir)src\caffe\proto\%(Filename).pb.h</Outputs>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="layers\absval_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\base_data_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\bnll_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\concat_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\contrastive_loss_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\conv_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_conv_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_pooling_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_relu_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_sigmoid_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_softmax_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\cudnn_tanh_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\deconv_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\dropout_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\eltwise_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\euclidean_loss_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\exp_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\filter_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\hdf5_data_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\hdf5_output_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\im2col_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\inner_product_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\log_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\lrn_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\mvn_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\pooling_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\power_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\prelu_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\reduction_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\relu_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\sigmoid_cross_entropy_loss_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\sigmoid_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\silence_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\slice_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\softmax_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\softmax_loss_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\split_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\tanh_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="layers\threshold_layer.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="util\im2col.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+    <CudaCompile Include="util\math_functions.cu">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">true</ExcludedFromBuild>
+    </CudaCompile>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{733289A2-4F35-4A95-96D6-AAF73EE8B691}</ProjectGuid>
+    <RootNamespace>caffe</RootNamespace>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.0.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="DebugConfiguration.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="DebugConfiguration.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ReleaseConfiguration.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ReleaseConfiguration.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <NuGetPackageImportStamp>f0fc31ca</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
+    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <TargetName>caffe</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <TargetName>caffe</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <TargetName>caffe</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
+    <OutDir>$(SolutionDir)bin\py\caffe</OutDir>
+    <TargetName>caffe</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(Opencv4VS)\lib;C:\Anaconda\libs;$(SolutionDir)packages\protobuf-$(PlatformToolset).2.6.1\build\native\lib\$(Platform)\$(PlatformToolset)\$(ActualConfiguration);$(SolutionDir)packages\hdf5-$(PlatformToolset).1.8.14\lib\native\lib\$(Platform);$(CUDA_PATH)\lib\$(Platform)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libprotobuf.lib;%(AdditionalDependencies);StatTimer.lib;clBLAS.lib;clFFT.lib;opencv_calib3d300d.lib;opencv_core300d.lib;opencv_cuda300d.lib;opencv_cudaarithm300d.lib;opencv_cudabgsegm300d.lib;opencv_cudacodec300d.lib;opencv_cudafeatures2d300d.lib;opencv_cudafilters300d.lib;opencv_cudaimgproc300d.lib;opencv_cudalegacy300d.lib;opencv_cudaoptflow300d.lib;opencv_cudastereo300d.lib;opencv_cudawarping300d.lib;opencv_cudev300d.lib;opencv_features2d300d.lib;opencv_flann300d.lib;opencv_highgui300d.lib;opencv_imgcodecs300d.lib;opencv_imgproc300d.lib;opencv_ml300d.lib;opencv_objdetect300d.lib;opencv_photo300d.lib;opencv_shape300d.lib;opencv_stitching300d.lib;opencv_superres300d.lib;opencv_ts300d.lib;opencv_video300d.lib;opencv_videoio300d.lib;opencv_videostab300d.lib;opengl32.lib;glu32.lib;hdf5_D.lib;hdf5_cpp_D.lib;szip_D.lib;zlib_D.lib</AdditionalDependencies>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Link>
+    <CustomBuildStep>
+      <Command>copy "$(OutDir)gflagsd.dll" "$(OutDir)libgflags-debug.dll"</Command>
+      <Message>Copying gflagsd.dll to libgflag-debug.dll - for some reason we need both</Message>
+      <Outputs>$(OutDir)libgflags-debug.dll</Outputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+)
+</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(Opencv4VS)\lib;C:\Anaconda\libs;$(SolutionDir)packages\protobuf-$(PlatformToolset).2.6.1\build\native\lib\$(Platform)\$(PlatformToolset)\$(ActualConfiguration);$(SolutionDir)packages\hdf5-$(PlatformToolset).1.8.14\lib\native\lib\$(Platform)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libprotobuf.lib;%(AdditionalDependencies);StatTimer.lib;clBLAS.lib;clFFT.lib;opencv_calib3d300d.lib;opencv_core300d.lib;opencv_cuda300d.lib;opencv_cudaarithm300d.lib;opencv_cudabgsegm300d.lib;opencv_cudacodec300d.lib;opencv_cudafeatures2d300d.lib;opencv_cudafilters300d.lib;opencv_cudaimgproc300d.lib;opencv_cudalegacy300d.lib;opencv_cudaoptflow300d.lib;opencv_cudastereo300d.lib;opencv_cudawarping300d.lib;opencv_cudev300d.lib;opencv_features2d300d.lib;opencv_flann300d.lib;opencv_highgui300d.lib;opencv_imgcodecs300d.lib;opencv_imgproc300d.lib;opencv_ml300d.lib;opencv_objdetect300d.lib;opencv_photo300d.lib;opencv_shape300d.lib;opencv_stitching300d.lib;opencv_superres300d.lib;opencv_ts300d.lib;opencv_video300d.lib;opencv_videoio300d.lib;opencv_videostab300d.lib;opengl32.lib;glu32.lib;hdf5_D.lib;hdf5_cpp_D.lib;szip_D.lib;zlib_D.lib</AdditionalDependencies>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Link>
+    <CustomBuildStep>
+      <Command>copy "$(OutDir)gflagsd.dll" "$(OutDir)libgflags-debug.dll"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(OutDir)libgflags-debug.dll</Outputs>
+      <Message>Copying gflagsd.dll to libgflag-debug.dll - for some reason we need both</Message>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+)
+</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libprotobuf.lib;%(AdditionalDependencies);StatTimer.lib;clBLAS.lib;clFFT.lib;opencv_calib3d300.lib;opencv_core300.lib;opencv_cuda300.lib;opencv_cudaarithm300.lib;opencv_cudabgsegm300.lib;opencv_cudacodec300.lib;opencv_cudafeatures2d300.lib;opencv_cudafilters300.lib;opencv_cudaimgproc300.lib;opencv_cudalegacy300.lib;opencv_cudaoptflow300.lib;opencv_cudastereo300.lib;opencv_cudawarping300.lib;opencv_cudev300.lib;opencv_features2d300.lib;opencv_flann300.lib;opencv_highgui300.lib;opencv_imgcodecs300.lib;opencv_imgproc300.lib;opencv_ml300.lib;opencv_objdetect300.lib;opencv_photo300.lib;opencv_shape300.lib;opencv_stitching300.lib;opencv_superres300.lib;opencv_ts300.lib;opencv_video300.lib;opencv_videoio300.lib;opencv_videostab300.lib;opengl32.lib;glu32.lib;hdf5.lib;hdf5_cpp.lib;szip.lib;zlib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(Opencv4VS)\lib;C:\Anaconda\libs;$(SolutionDir)packages\protobuf-$(PlatformToolset).2.6.1\build\native\lib\$(Platform)\$(PlatformToolset)\$(ActualConfiguration);$(SolutionDir)packages\hdf5-$(PlatformToolset).1.8.14\lib\native\lib\$(Platform);$(CUDA_PATH)\lib\$(Platform)</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Link>
+    <CustomBuildStep>
+      <Command>copy "$(OutDir)gflags.dll" "$(OutDir)libgflags.dll"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(OutDir)libgflags.dll</Outputs>
+      <Message>Copying gflags.dll to libgflag.dll - for some reason we need both</Message>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+)
+</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-CPU_ONLY|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libprotobuf.lib;%(AdditionalDependencies);StatTimer.lib;clBLAS.lib;clFFT.lib;opencv_calib3d300.lib;opencv_core300.lib;opencv_cuda300.lib;opencv_cudaarithm300.lib;opencv_cudabgsegm300.lib;opencv_cudacodec300.lib;opencv_cudafeatures2d300.lib;opencv_cudafilters300.lib;opencv_cudaimgproc300.lib;opencv_cudalegacy300.lib;opencv_cudaoptflow300.lib;opencv_cudastereo300.lib;opencv_cudawarping300.lib;opencv_cudev300.lib;opencv_features2d300.lib;opencv_flann300.lib;opencv_highgui300.lib;opencv_imgcodecs300.lib;opencv_imgproc300.lib;opencv_ml300.lib;opencv_objdetect300.lib;opencv_photo300.lib;opencv_shape300.lib;opencv_stitching300.lib;opencv_superres300.lib;opencv_ts300.lib;opencv_video300.lib;opencv_videoio300.lib;opencv_videostab300.lib;opengl32.lib;glu32.lib;hdf5.lib;hdf5_cpp.lib;szip.lib;zlib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(Opencv4VS)\lib;C:\Anaconda\libs;$(SolutionDir)packages\protobuf-$(PlatformToolset).2.6.1\build\native\lib\$(Platform)\$(PlatformToolset)\$(ActualConfiguration);$(SolutionDir)packages\hdf5-$(PlatformToolset).1.8.14\lib\native\lib\$(Platform)</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Link>
+    <CustomBuildStep>
+      <Command>copy "$(OutDir)gflags.dll" "$(OutDir)libgflags.dll"</Command>
+      <Message>Copying gflags.dll to libgflag.dll - for some reason we need both</Message>
+      <Outputs>$(OutDir)libgflags.dll</Outputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>set notfound=
+for %%f in (
+  "$(SolutionDir)src\caffe\proto\caffe.pb.h"
+  "$(SolutionDir)src\caffe\proto\caffe.pb.cc"
+) do if not exist %%f set notfound=1
+if defined notfound (
+  cd "$(SolutionDir)src\caffe\proto"
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --cpp_out=./ caffe.proto
+  echo "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+  "$(SolutionDir)3rdparty\bin\protoc.exe" --python_out=./ caffe.proto
+)
+</Command>
+      <Message>Protobuf Code Generation</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\boost_python.1.58.0.0\build\native\boost_python.targets" Condition="Exists('..\packages\boost_python.1.58.0.0\build\native\boost_python.targets')" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.0.targets" />
+    <Import Project="..\..\packages\boost.1.59.0.0\build\native\boost.targets" Condition="Exists('..\..\packages\boost.1.59.0.0\build\native\boost.targets')" />
+    <Import Project="..\..\packages\boost_chrono-vc120.1.59.0.0\build\native\boost_chrono-vc120.targets" Condition="Exists('..\..\packages\boost_chrono-vc120.1.59.0.0\build\native\boost_chrono-vc120.targets')" />
+    <Import Project="..\..\packages\boost_date_time-vc120.1.59.0.0\build\native\boost_date_time-vc120.targets" Condition="Exists('..\..\packages\boost_date_time-vc120.1.59.0.0\build\native\boost_date_time-vc120.targets')" />
+    <Import Project="..\..\packages\boost_system-vc120.1.59.0.0\build\native\boost_system-vc120.targets" Condition="Exists('..\..\packages\boost_system-vc120.1.59.0.0\build\native\boost_system-vc120.targets')" />
+    <Import Project="..\..\packages\boost_thread-vc120.1.59.0.0\build\native\boost_thread-vc120.targets" Condition="Exists('..\..\packages\boost_thread-vc120.1.59.0.0\build\native\boost_thread-vc120.targets')" />
+    <Import Project="..\..\packages\gflags.2.1.2.1\build\native\gflags.targets" Condition="Exists('..\..\packages\gflags.2.1.2.1\build\native\gflags.targets')" />
+    <Import Project="..\..\packages\glog.0.3.3.0\build\native\glog.targets" Condition="Exists('..\..\packages\glog.0.3.3.0\build\native\glog.targets')" />
+    <Import Project="..\..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets" Condition="Exists('..\..\packages\hdf5-v120.1.8.14\build\native\hdf5-v120.targets')" />
+    <Import Project="..\..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets" Condition="Exists('..\..\packages\lmdb-v120.0.9.14\build\native\lmdb-v120.targets')" />
+    <Import Project="..\..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets" Condition="Exists('..\..\packages\OpenBLAS.0.2.14.1\build\native\openblas.targets')" />
+    <Import Project="..\..\packages\protobuf-v120.2.6.1\build\native\protobuf-v120.targets" Condition="Exists('..\..\packages\protobuf-v120.2.6.1\build\native\protobuf-v120.targets')" />
+  </ImportGroup>
+</Project>
