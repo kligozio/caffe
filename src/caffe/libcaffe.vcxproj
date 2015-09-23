@@ -392,6 +392,7 @@
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
     <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
@@ -399,6 +400,7 @@
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
     <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
@@ -406,6 +408,7 @@
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
     <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-CPU_ONLY|x64'">
     <OutDir>$(SolutionDir)lib\$(Platform)\$(Configuration)</OutDir>
@@ -413,6 +416,7 @@
     <TargetExt>.lib</TargetExt>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
     <ExtensionsToDeleteOnClean>$(ProjectDir)proto\caffe.pb.cc;$(ProjectDir)proto\caffe.pb.h;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -422,6 +426,7 @@
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -459,6 +464,7 @@ if defined notfound (
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -500,6 +506,7 @@ if defined notfound (
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include;$(CUDA_PATH)\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -543,6 +550,7 @@ if defined notfound (
       <AdditionalIncludeDirectories>$(Opencv4VS)\include;$(SolutionDir)include;$(SolutionDir)src;$(SolutionDir)packages\protobuf-v120.2.6.1\build\native\include;$(SolutionDir)packages\LevelDB.1.16.0.5\lib\native\include;$(SolutionDir)packages\Snappy.1.1.1.7\lib\native\include;$(SolutionDir)packages\Crc32C.1.0.4\lib\native\include;$(SolutionDir)\3rdparty\getopt;$(SolutionDir)\3rdparty\h5lt;$(SolutionDir)\3rdparty\mkstemp;$(SolutionDir)\3rdparty\unistd;C:\Anaconda\include;C:\Anaconda\Lib\site-packages\numpy\core\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDLL;WIN32;_SCL_SECURE_NO_WARNINGS;hdf5_hl_EXPORTS;USE_LEVELDB;CPU_ONLY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

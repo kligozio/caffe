@@ -8,9 +8,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcaffe", "src\caffe\libcaffe.vcxproj", "{733289A2-4F35-4A95-96D6-AAF73EE8B691}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "caffe", "tools\caffe.vcxproj", "{B93BDF3F-081B-4FDC-A6F6-9B13B5490897}"
-	ProjectSection(ProjectDependencies) = postProject
-		{733289A2-4F35-4A95-96D6-AAF73EE8B691} = {733289A2-4F35-4A95-96D6-AAF73EE8B691}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
