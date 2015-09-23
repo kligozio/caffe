@@ -44,7 +44,7 @@ don't change the `pyconfig.h` file.
 
 ## Using
 
-Currently, only the Python project is operational.
+Currently, only the caffe.exe and \_caffe.pyd (Python) project is operational.
 
 ### Python
 You must build the pycaffe project.
